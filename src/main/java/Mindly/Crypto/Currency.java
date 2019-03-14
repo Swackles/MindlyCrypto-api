@@ -20,11 +20,21 @@ public class Currency {
         this.id = id;
         this.name = name;
         this.shortName = shortName;
+            System.out.println(shortName);
+            System.out.println(shortName.equals("XRP"));
+            if (!shortName.equals("XRP")) {
+                this.value = getConversionRate(shortName, "eur");
+            } else {
+                float XRPBTC = getConversionRate(shortName, "btc");
+                float BTCEUR = getConversionRate("btc", "eur");
 
+                this.value = XRPBTC * BTCEUR;
+            }
+    }
+
+    private float getConversionRate(String shortNameFirst, String shortNameSecond) {
         try {
-            System.out.println("https://api.bitfinex.com/v1/pubticker/"+shortName+"EUR");
-
-            URL url = new URL("https://api.bitfinex.com/v1/pubticker/"+shortName+"eur");
+            URL url = new URL("https://api.bitfinex.com/v1/pubticker/"+shortNameFirst+"" +shortNameSecond);
 
             HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
             con.setRequestMethod("GET");
@@ -45,9 +55,9 @@ public class Currency {
             Pattern pattern = Pattern.compile(".*?\"last_price\":\"([0-9.]+\\w)\",.*?");
             Matcher matcher = pattern.matcher(content.toString());
             if(matcher.find()) {
-                this.value = Float.parseFloat(matcher.group(1));
+                return Float.parseFloat(matcher.group(1));
             } else {
-                this.value = null;
+                throw new IOException("Error getting value");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
