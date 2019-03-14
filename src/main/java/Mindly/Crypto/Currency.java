@@ -42,8 +42,6 @@ public class Currency {
             }
             in.close();
 
-
-            System.out.println(content.toString());
             Pattern pattern = Pattern.compile(".*?\"last_price\":\"([0-9.]+\\w)\",.*?");
             Matcher matcher = pattern.matcher(content.toString());
             if(matcher.find()) {

@@ -1,7 +1,10 @@
 package Mindly.postgres;
 
+import Mindly.Application;
 import Mindly.Crypto.Currency;
+import org.springframework.beans.factory.annotation.Value;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,7 +14,9 @@ import java.util.ArrayList;
 public class currency {
     public static ArrayList<Currency> select() {
         try {
-            Connection con = DriverManager.getConnection("jdbc:postgresql://46.101.140.99:5432/mindlycryptoportfolio", "postgres", "");
+            ConnectionSettings conSettings  = new ConnectionSettings();
+
+            Connection con = DriverManager.getConnection(conSettings.getUrl(), conSettings.getUsername(), conSettings.getPassword());
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM public.currencies");
 
             ResultSet rs = stmt.executeQuery();
@@ -20,7 +25,6 @@ public class currency {
 
             while(rs.next()) {
                 currencies.add(new Currency(rs.getInt(1), rs.getString(2), rs.getString(3)));
-                System.out.println(rs.getInt(1)+ " " + rs.getString(2) + " " + rs.getString(3));
             }
             return currencies;
 
