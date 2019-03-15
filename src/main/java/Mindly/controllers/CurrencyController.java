@@ -6,9 +6,10 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class CurrencyController {
-
     @RequestMapping("/currencies")
     public ResponseEntity<String> Currencies() {
         try {

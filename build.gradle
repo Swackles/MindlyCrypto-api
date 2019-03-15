@@ -19,8 +19,8 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 bootJar {
-    baseName = 'gs-spring-boot'
-    version = '0.1.0'
+    baseName = 'Mindly portfolio API'
+    version = '1.0.0'
 }
 
 repositories {
