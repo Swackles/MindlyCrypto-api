@@ -19,7 +19,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 bootJar {
-    baseName = 'Mindly portfolio API'
+    baseName = 'Mindly-Portfolio-API'
     version = '1.0.0'
 }
 
