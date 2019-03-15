@@ -30,7 +30,7 @@ public class currency {
 
         } catch(Exception e) {
             System.out.println(e.getMessage());
-            return null;
+            throw new RuntimeException("Failed to select currency");
         }
     }
 }

@@ -21,14 +21,13 @@ public class portfolio {
             ArrayList<PortfolioItem> portfolioItems = new ArrayList<PortfolioItem>();
 
             while(rs.next()) {
-                portfolioItems.add(new PortfolioItem(rs.getInt(1), currencies.get(rs.getInt(2) - 1).getValue(), rs.getInt(3), rs.getDate(5), rs.getString(4)));
-                System.out.println(rs.getInt(1)+ " " + rs.getString(2) + " " + rs.getString(3));
+                portfolioItems.add(new PortfolioItem(rs.getInt(1), currencies.get(rs.getInt(2) - 1), rs.getInt(3), rs.getDate(5), rs.getString(4)));
             }
             return portfolioItems;
 
         } catch(Exception e) {
             System.out.println(e.getMessage());
-            return null;
+            throw new RuntimeException("Failed to select portfolio");
         }
     }
 
@@ -45,13 +44,13 @@ public class portfolio {
             ArrayList<PortfolioItem> portfolioItems = new ArrayList<PortfolioItem>();
 
             while(rs.next()) {
-                portfolioItems.add(new PortfolioItem(rs.getInt(1), currencies.get(rs.getInt(2) - 1).getValue(), rs.getInt(3), rs.getDate(5), rs.getString(4)));
+                portfolioItems.add(new PortfolioItem(rs.getInt(1), currencies.get(rs.getInt(2)), rs.getInt(3), rs.getDate(5), rs.getString(4)));
             }
             return portfolioItems;
 
         } catch(Exception e) {
             System.out.println(e.getMessage());
-            return null;
+            throw new RuntimeException("Failed to select portfolio");
         }
     }
 
@@ -68,7 +67,7 @@ public class portfolio {
             return select(rs.getInt(1));
         } catch(Exception e) {
             System.out.println(e.getMessage());
-            return null;
+            throw new RuntimeException("Failed to insert portfolio");
         }
     }
 
@@ -83,7 +82,7 @@ public class portfolio {
             return true;
         } catch(Exception e) {
             System.out.println(e);
-            return false;
+            throw new RuntimeException("Failed to delete portfolio");
         }
     }
 }

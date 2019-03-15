@@ -20,8 +20,6 @@ public class Currency {
         this.id = id;
         this.name = name;
         this.shortName = shortName;
-            System.out.println(shortName);
-            System.out.println(shortName.equals("XRP"));
             if (!shortName.equals("XRP")) {
                 this.value = getConversionRate(shortName, "eur");
             } else {
